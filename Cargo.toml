@@ -17,24 +17,25 @@ vmm-sys-util = ">=0.10.0"
 machine = { path = "machine" }
 machine_manager = { path = "machine_manager" }
 util = { path = "util" }
-#virtio = { path = "virtio" }
+virtio = { path = "virtio" }
 
 [target.'cfg(not(target_env = "musl"))'.dependencies]
 vnc = { path = "vnc" }
 
 [workspace]
 members = [
-     #"address_space",
-     #"devices",
-     #"hypervisor",
-     #"machine_manager",
-     #"migration",
-     #"migration_derive",
+     "address_space",
+     "devices",
+     "hypervisor",
+     "machine_manager",
+     "migration",
+     "migration_derive",
      "pci",
-     #"sysbus",
-     #"util",
+     "sysbus",
+     "util",
      "acpi",
-     #"virtio",
+     "virtio",
+     "tests/mod_test",
 ]
 
 #members = [

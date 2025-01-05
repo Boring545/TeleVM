@@ -7,13 +7,14 @@ name = "TeleVM"
 version = "1.0.0"
 dependencies = [
  "anyhow",
- "kvm-ioctls 0.1.0",
+ "kvm-ioctls",
  "libc",
  "log",
  "machine",
  "machine_manager",
  "thiserror",
  "util",
+ "virtio",
  "vmm-sys-util 0.12.1",
  "vnc",
 ]
@@ -47,8 +48,8 @@ dependencies = [
  "anyhow",
  "arc-swap 1.7.1",
  "hypervisor",
- "kvm-bindings 0.1.0",
- "kvm-ioctls 0.1.0",
+ "kvm-bindings",
+ "kvm-ioctls",
  "libc",
  "log",
  "machine_manager",
@@ -139,8 +140,8 @@ dependencies = [
  "address_space",
  "anyhow",
  "devices",
- "kvm-bindings 0.1.0",
- "kvm-ioctls 0.1.0",
+ "kvm-bindings",
+ "kvm-ioctls",
  "libc",
  "log",
  "thiserror",
@@ -195,8 +196,8 @@ version = "2.2.0"
 dependencies = [
  "anyhow",
  "hypervisor",
- "kvm-bindings 0.1.0",
- "kvm-ioctls 0.1.0",
+ "kvm-bindings",
+ "kvm-ioctls",
  "libc",
  "log",
  "machine_manager",
@@ -217,8 +218,8 @@ dependencies = [
  "byteorder",
  "drm-fourcc",
  "hypervisor",
- "kvm-bindings 0.1.0",
- "kvm-ioctls 0.1.0",
+ "kvm-bindings",
+ "kvm-ioctls",
  "libc",
  "log",
  "machine_manager",
@@ -306,13 +307,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "hex"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
+
+[[package]]
 name = "hypervisor"
 version = "2.2.0"
 dependencies = [
  "anyhow",
  "arc-swap 0.4.8",
- "kvm-bindings 0.1.0",
- "kvm-ioctls 0.1.0",
+ "kvm-bindings",
+ "kvm-ioctls",
  "lazy_static",
  "log",
  "once_cell",
@@ -354,32 +361,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "kvm-bindings"
-version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "efe70e65a5b092161d17f5005b66e5eefe7a94a70c332e755036fc4af78c4e79"
-dependencies = [
- "vmm-sys-util 0.11.2",
-]
-
-[[package]]
 name = "kvm-ioctls"
 version = "0.1.0"
 dependencies = [
- "kvm-bindings 0.1.0",
+ "kvm-bindings",
  "libc",
  "vmm-sys-util 0.12.1",
-]
-
-[[package]]
-name = "kvm-ioctls"
-version = "0.12.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c3a321cabd827642499c77e27314f388dd83a717a5ca716b86476fb947f73ae4"
-dependencies = [
- "kvm-bindings 0.6.0",
- "libc",
- "vmm-sys-util 0.11.2",
 ]
 
 [[package]]
@@ -420,8 +407,8 @@ dependencies = [
  "cpu",
  "devices",
  "hypervisor",
- "kvm-bindings 0.1.0",
- "kvm-ioctls 0.1.0",
+ "kvm-bindings",
+ "kvm-ioctls",
  "libc",
  "log",
  "machine_manager",
@@ -465,8 +452,8 @@ version = "2.2.0"
 dependencies = [
  "anyhow",
  "hypervisor",
- "kvm-bindings 0.1.0",
- "kvm-ioctls 0.1.0",
+ "kvm-bindings",
+ "kvm-ioctls",
  "log",
  "machine_manager",
  "migration_derive",
@@ -495,6 +482,24 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e2d80299ef12ff69b16a84bb182e3b9df68b5a91574d3d4fa6e41b65deec4df1"
 dependencies = [
  "adler2",
+]
+
+[[package]]
+name = "mod_test"
+version = "2.2.0"
+dependencies = [
+ "acpi",
+ "anyhow",
+ "byteorder",
+ "devices",
+ "hex",
+ "machine",
+ "rand",
+ "serde_json",
+ "usb",
+ "util",
+ "virtio",
+ "vmm-sys-util 0.11.2",
 ]
 
 [[package]]
@@ -556,8 +561,8 @@ dependencies = [
  "anyhow",
  "byteorder",
  "hypervisor",
- "kvm-bindings 0.6.0",
- "kvm-ioctls 0.12.0",
+ "kvm-bindings",
+ "kvm-ioctls",
  "libc",
  "log",
  "machine_manager",
@@ -578,6 +583,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "953ec861398dccce10c670dfeaf3ec4911ca479e9c02154b3a215178c5f566f2"
 
 [[package]]
+name = "ppv-lite86"
+version = "0.2.20"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "77957b295656769bb8ad2b6a6b09d897d94f05c41b069aede1fcdaa675eaea04"
+dependencies = [
+ "zerocopy",
+]
+
+[[package]]
 name = "proc-macro2"
 version = "1.0.92"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -593,6 +607,36 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b5b9d34b8991d19d98081b46eacdd8eb58c6f2b201139f7c5f643cc155a633af"
 dependencies = [
  "proc-macro2",
+]
+
+[[package]]
+name = "rand"
+version = "0.8.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "34af8d1a0e25924bc5b7c43c079c942339d8f0a8b57c39049bef581b46327404"
+dependencies = [
+ "libc",
+ "rand_chacha",
+ "rand_core",
+]
+
+[[package]]
+name = "rand_chacha"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e6c10a63a0fa32252be49d21e7709d4d4baf8d231c2dbce1eaa8141b9b127d88"
+dependencies = [
+ "ppv-lite86",
+ "rand_core",
+]
+
+[[package]]
+name = "rand_core"
+version = "0.6.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ec0be4795e2f6a28069bec0b5ff3e2ac9bafc99e6a9a7dc3547996c5c816922c"
+dependencies = [
+ "getrandom",
 ]
 
 [[package]]
@@ -879,7 +923,7 @@ dependencies = [
  "anyhow",
  "error-chain",
  "hypervisor",
- "kvm-ioctls 0.1.0",
+ "kvm-ioctls",
  "thiserror",
  "vmm-sys-util 0.12.1",
 ]
@@ -929,6 +973,23 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8ecb6da28b8a351d773b68d5825ac39017e680750f980f3a1a85cd8dd28a47c1"
 
 [[package]]
+name = "usb"
+version = "2.2.0"
+dependencies = [
+ "address_space",
+ "anyhow",
+ "byteorder",
+ "libc",
+ "log",
+ "machine_manager",
+ "once_cell",
+ "pci",
+ "thiserror",
+ "util",
+ "vnc",
+]
+
+[[package]]
 name = "util"
 version = "2.2.0"
 dependencies = [
@@ -937,8 +998,8 @@ dependencies = [
  "byteorder",
  "errno",
  "io-uring",
- "kvm-bindings 0.1.0",
- "kvm-ioctls 0.1.0",
+ "kvm-bindings",
+ "kvm-ioctls",
  "libc",
  "log",
  "once_cell",
@@ -962,7 +1023,7 @@ dependencies = [
  "byteorder",
  "devices",
  "hypervisor",
- "kvm-ioctls 0.1.0",
+ "kvm-ioctls",
  "libc",
  "log",
  "machine_manager",
@@ -1125,3 +1186,24 @@ name = "windows_x86_64_msvc"
 version = "0.52.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "589f6da84c646204747d1270a2a5661ea66ed1cced2631d546fdfb155959f9ec"
+
+[[package]]
+name = "zerocopy"
+version = "0.7.35"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1b9b4fd18abc82b8136838da5d50bae7bdea537c574d8dc1a34ed098d6c166f0"
+dependencies = [
+ "byteorder",
+ "zerocopy-derive",
+]
+
+[[package]]
+name = "zerocopy-derive"
+version = "0.7.35"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fa4f8080344d4671fb4e831a13ad1e68092748387dfc4f55e356242fae12ce3e"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.90",
+]
