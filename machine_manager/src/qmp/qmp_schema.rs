@@ -1325,7 +1325,6 @@ impl Command for query_vnc {
         Default::default()
     }
 }
-
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct VncInfo {
     #[serde(rename = "enabled")]
@@ -1341,7 +1340,6 @@ pub struct VncInfo {
     #[serde(rename = "clients")]
     pub clients: Vec<VncClientInfo>,
 }
-
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct VncClientInfo {
     #[serde(rename = "host")]
@@ -1351,6 +1349,7 @@ pub struct VncClientInfo {
     #[serde(rename = "family")]
     pub family: String,
 }
+
 
 /// balloon:
 ///

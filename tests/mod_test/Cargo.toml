@@ -14,7 +14,7 @@ serde_json = "1.0"
 byteorder = "1.4.3"
 devices = { path = "../../devices" }
 util = { path = "../../util" }
-acpi = { path = "../../acpi" }
+#acpi = { path = "../../acpi" }
 machine = { path = "../../machine" }
 virtio = { path = "../../virtio"}
-usb = { path = "../../usb" }
+#usb = { path = "../../usb" }

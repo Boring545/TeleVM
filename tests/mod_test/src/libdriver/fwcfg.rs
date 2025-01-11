@@ -17,11 +17,14 @@ use devices::legacy::FwCfgEntryType;
 use super::malloc::GuestAllocator;
 use crate::libtest::TestState;
 use crate::utils::{swap_u16, swap_u32, swap_u64};
-use machine::standard_vm::aarch64::{LayoutEntryType, MEM_LAYOUT};
+// use machine::standard_vm::aarch64::{LayoutEntryType, MEM_LAYOUT};
+use machine::micro_vm::mem_layout::{LayoutEntryType, MEM_LAYOUT};
 
 #[cfg(target_arch = "aarch64")]
 pub const FW_CFG_BASE: u64 = MEM_LAYOUT[LayoutEntryType::FwCfg as usize].0;
 #[cfg(target_arch = "x86_64")]
+pub const FW_CFG_BASE: u64 = 0x510;
+#[cfg(target_arch = "riscv64")]
 pub const FW_CFG_BASE: u64 = 0x510;
 
 const FW_CFG_FNAME_SIZE: usize = 56;
@@ -34,7 +37,8 @@ pub struct FwCfgDmaAccess {
 }
 
 pub fn bios_args(base_args: &mut Vec<&str>) {
-    let mut args: Vec<&str> = "-machine virt".split(' ').collect();
+    // let mut args: Vec<&str> = "-machine virt".split(' ').collect();
+    let mut args: Vec<&str> = "-machine microvm".split(' ').collect();
     base_args.append(&mut args);
     args = "-drive file=/usr/share/edk2/aarch64/QEMU_EFI-pflash.raw,if=pflash,unit=0,readonly=true"
         .split(' ')

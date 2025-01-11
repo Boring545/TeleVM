@@ -7,7 +7,7 @@ name = "TeleVM"
 version = "1.0.0"
 dependencies = [
  "anyhow",
- "kvm-ioctls",
+ "kvm-ioctls 0.1.0",
  "libc",
  "log",
  "machine",
@@ -48,8 +48,8 @@ dependencies = [
  "anyhow",
  "arc-swap 1.7.1",
  "hypervisor",
- "kvm-bindings",
- "kvm-ioctls",
+ "kvm-bindings 0.1.0",
+ "kvm-ioctls 0.1.0",
  "libc",
  "log",
  "machine_manager",
@@ -140,8 +140,8 @@ dependencies = [
  "address_space",
  "anyhow",
  "devices",
- "kvm-bindings",
- "kvm-ioctls",
+ "kvm-bindings 0.1.0",
+ "kvm-ioctls 0.1.0",
  "libc",
  "log",
  "thiserror",
@@ -156,10 +156,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 
 [[package]]
-name = "cc"
-version = "1.2.4"
+name = "capng"
+version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9157bbaa6b165880c27a4293a474c91cdcf265cc68cc829bf10be0964a391caf"
+checksum = "7a26766f93f07f7e8b8309ed2824fa2a68f5d12d219de855e24688e9fbe89e85"
+dependencies = [
+ "bitflags",
+ "libc",
+]
+
+[[package]]
+name = "cc"
+version = "1.2.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f34d93e62b03caf570cccc334cbc6c2fceca82f39211051345108adcba3eebdc"
 dependencies = [
  "shlex",
 ]
@@ -196,8 +206,8 @@ version = "2.2.0"
 dependencies = [
  "anyhow",
  "hypervisor",
- "kvm-bindings",
- "kvm-ioctls",
+ "kvm-bindings 0.1.0",
+ "kvm-ioctls 0.1.0",
  "libc",
  "log",
  "machine_manager",
@@ -218,8 +228,8 @@ dependencies = [
  "byteorder",
  "drm-fourcc",
  "hypervisor",
- "kvm-bindings",
- "kvm-ioctls",
+ "kvm-bindings 0.1.0",
+ "kvm-ioctls 0.1.0",
  "libc",
  "log",
  "machine_manager",
@@ -318,8 +328,8 @@ version = "2.2.0"
 dependencies = [
  "anyhow",
  "arc-swap 0.4.8",
- "kvm-bindings",
- "kvm-ioctls",
+ "kvm-bindings 0.1.0",
+ "kvm-ioctls 0.1.0",
  "lazy_static",
  "log",
  "once_cell",
@@ -361,12 +371,32 @@ dependencies = [
 ]
 
 [[package]]
+name = "kvm-bindings"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "efe70e65a5b092161d17f5005b66e5eefe7a94a70c332e755036fc4af78c4e79"
+dependencies = [
+ "vmm-sys-util 0.11.2",
+]
+
+[[package]]
 name = "kvm-ioctls"
 version = "0.1.0"
 dependencies = [
- "kvm-bindings",
+ "kvm-bindings 0.1.0",
  "libc",
  "vmm-sys-util 0.12.1",
+]
+
+[[package]]
+name = "kvm-ioctls"
+version = "0.12.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c3a321cabd827642499c77e27314f388dd83a717a5ca716b86476fb947f73ae4"
+dependencies = [
+ "kvm-bindings 0.6.0",
+ "libc",
+ "vmm-sys-util 0.11.2",
 ]
 
 [[package]]
@@ -377,9 +407,15 @@ checksum = "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
 
 [[package]]
 name = "libc"
-version = "0.2.168"
+version = "0.2.167"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5aaeb2981e0606ca11d79718f8bb01164f1d6ed75080182d3abf017e6d244b6d"
+checksum = "09d6582e104315a817dff97f75133544b2e094ee22447d2acf4a74e189ba06fc"
+
+[[package]]
+name = "libseccomp-sys"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9a7cbbd4ad467251987c6e5b47d53b11a5a05add08f2447a9e2d70aef1e0d138"
 
 [[package]]
 name = "lock_api"
@@ -407,8 +443,8 @@ dependencies = [
  "cpu",
  "devices",
  "hypervisor",
- "kvm-bindings",
- "kvm-ioctls",
+ "kvm-bindings 0.1.0",
+ "kvm-ioctls 0.1.0",
  "libc",
  "log",
  "machine_manager",
@@ -428,6 +464,7 @@ name = "machine_manager"
 version = "2.2.0"
 dependencies = [
  "anyhow",
+ "hex",
  "libc",
  "log",
  "once_cell",
@@ -452,8 +489,8 @@ version = "2.2.0"
 dependencies = [
  "anyhow",
  "hypervisor",
- "kvm-bindings",
- "kvm-ioctls",
+ "kvm-bindings 0.1.0",
+ "kvm-ioctls 0.1.0",
  "log",
  "machine_manager",
  "migration_derive",
@@ -488,7 +525,6 @@ dependencies = [
 name = "mod_test"
 version = "2.2.0"
 dependencies = [
- "acpi",
  "anyhow",
  "byteorder",
  "devices",
@@ -496,7 +532,6 @@ dependencies = [
  "machine",
  "rand",
  "serde_json",
- "usb",
  "util",
  "virtio",
  "vmm-sys-util 0.11.2",
@@ -525,6 +560,16 @@ checksum = "5ffd2b0a5634335b135d5728d84c5e0fd726954b87111f7506a61c502280d982"
 dependencies = [
  "libc",
  "windows-sys 0.59.0",
+]
+
+[[package]]
+name = "ozone"
+version = "2.2.0"
+dependencies = [
+ "anyhow",
+ "libc",
+ "thiserror",
+ "util",
 ]
 
 [[package]]
@@ -561,8 +606,8 @@ dependencies = [
  "anyhow",
  "byteorder",
  "hypervisor",
- "kvm-bindings",
- "kvm-ioctls",
+ "kvm-bindings 0.1.0",
+ "kvm-ioctls 0.1.0",
  "libc",
  "log",
  "machine_manager",
@@ -771,18 +816,18 @@ dependencies = [
 
 [[package]]
 name = "serde"
-version = "1.0.216"
+version = "1.0.215"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0b9781016e935a97e8beecf0c933758c97a5520d32930e460142b4cd80c6338e"
+checksum = "6513c1ad0b11a9376da888e3e0baa0077f1aed55c17f50e7b2397136129fb88f"
 dependencies = [
  "serde_derive",
 ]
 
 [[package]]
 name = "serde_derive"
-version = "1.0.216"
+version = "1.0.215"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "46f859dbbf73865c6627ed570e78961cd3ac92407a2d117204c49232485da55e"
+checksum = "ad1e866f866923f252f05c889987993144fb74e722403468a4ebd70c3cd756c0"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -923,7 +968,7 @@ dependencies = [
  "anyhow",
  "error-chain",
  "hypervisor",
- "kvm-ioctls",
+ "kvm-ioctls 0.1.0",
  "thiserror",
  "vmm-sys-util 0.12.1",
 ]
@@ -973,23 +1018,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8ecb6da28b8a351d773b68d5825ac39017e680750f980f3a1a85cd8dd28a47c1"
 
 [[package]]
-name = "usb"
-version = "2.2.0"
-dependencies = [
- "address_space",
- "anyhow",
- "byteorder",
- "libc",
- "log",
- "machine_manager",
- "once_cell",
- "pci",
- "thiserror",
- "util",
- "vnc",
-]
-
-[[package]]
 name = "util"
 version = "2.2.0"
 dependencies = [
@@ -998,8 +1026,8 @@ dependencies = [
  "byteorder",
  "errno",
  "io-uring",
- "kvm-bindings",
- "kvm-ioctls",
+ "kvm-bindings 0.1.0",
+ "kvm-ioctls 0.1.0",
  "libc",
  "log",
  "once_cell",
@@ -1015,6 +1043,58 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 
 [[package]]
+name = "vfio"
+version = "2.2.0"
+dependencies = [
+ "address_space",
+ "anyhow",
+ "byteorder",
+ "hypervisor",
+ "kvm-bindings 0.6.0",
+ "kvm-ioctls 0.12.0",
+ "libc",
+ "log",
+ "once_cell",
+ "pci",
+ "thiserror",
+ "util",
+ "vfio-bindings",
+ "vmm-sys-util 0.11.2",
+]
+
+[[package]]
+name = "vfio-bindings"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "43449b404c488f70507dca193debd4bea361fe8089869b947adc19720e464bce"
+
+[[package]]
+name = "vhost_user_fs"
+version = "2.2.0"
+dependencies = [
+ "acpi",
+ "address_space",
+ "anyhow",
+ "capng",
+ "devices",
+ "errno",
+ "error-chain",
+ "hypervisor",
+ "libc",
+ "libseccomp-sys",
+ "log",
+ "machine_manager",
+ "migration",
+ "migration_derive",
+ "pci",
+ "sysbus",
+ "thiserror",
+ "util",
+ "virtio",
+ "vmm-sys-util 0.11.2",
+]
+
+[[package]]
 name = "virtio"
 version = "2.2.0"
 dependencies = [
@@ -1023,7 +1103,7 @@ dependencies = [
  "byteorder",
  "devices",
  "hypervisor",
- "kvm-ioctls",
+ "kvm-ioctls 0.1.0",
  "libc",
  "log",
  "machine_manager",

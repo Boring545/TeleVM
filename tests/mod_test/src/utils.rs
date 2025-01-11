@@ -75,9 +75,10 @@ pub fn create_img(size: u64, flag: u8) -> String {
 
     assert!(cfg!(target_os = "linux"));
 
-    let mut image_path = format!("/tmp/stratovirt-{}.img", rng_name);
+    // name of image changed 'stratovirt' -> 'televm'
+    let mut image_path = format!("/tmp/televm-{}.img", rng_name);
     if flag == 1 {
-        image_path = format!("/var/log/stratovirt-{}.img", rng_name);
+        image_path = format!("/var/log/televm-{}.img", rng_name);
     }
 
     let image_path_of = format!("of={}", &image_path);
@@ -89,6 +90,12 @@ pub fn create_img(size: u64, flag: u8) -> String {
         .arg("count=1")
         .output()
         .expect("failed to create image");
+
+    // println!("output is {:?}", output);
+    if !output.status.success() {
+        eprintln!("Error: {:?}", String::from_utf8_lossy(&output.stderr));
+    }
+
     assert!(output.status.success());
     image_path
 }
